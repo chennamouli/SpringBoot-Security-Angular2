@@ -1,1 +1,24 @@
-Index file from templates
+<!doctype html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="utf-8"></meta>
+<title>Heroes of the World</title>
+<base href="/heroes/"></base>
+
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}" href="favicon.ico"></link>
+<link rel="stylesheet" th:href="@{/styles.bundle.css}" href="styles.bundle.css"></link>
+</head>
+<body>
+	<app-root>Loading ...</app-root>
+	<!-- <script type="text/javascript" th:src="@{/inline.bundle.js}" src="inline.bundle.js"></script>
+	<script type="text/javascript" th:src="@{/vendor.bundle.js}" src="vendor.bundle.js"></script>
+	<script type="text/javascript" th:src="@{/main.bundle.js}" src="main.bundle.js"></script> -->
+	
+	<script type="text/javascript" src="inline.bundle.js"></script>
+	<script type="text/javascript" src="vendor.bundle.js"></script>
+	<script type="text/javascript" src="main.bundle.js"></script>
+</body>
+</html>

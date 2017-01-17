@@ -1,0 +1,30 @@
+debug: false
+trace: false
+
+server:
+  port: 8080
+  context-path: /heroes
+  display-name: Heroes of the World
+  tomcat:
+    basedir: target/tomcat
+    accesslog:
+      enabled: true
+
+    
+spring:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  application:
+    name: Heroes of the World
+  output:
+    ansi:
+      enabled: always
+  #resources:
+    #cache-period: 604800 # one week, in seconds
+    
+     
+## Ref: http://stackoverflow.com/questions/39024656/thymeleaf-authentication-object-is-either-null-or-empty-on-an-error-page 
+security:
+  filter-dispatcher-types:
+    ASYNC, FORWARD, INCLUDE, REQUEST, ERROR
