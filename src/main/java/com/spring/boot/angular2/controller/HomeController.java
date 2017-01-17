@@ -15,9 +15,9 @@ public class HomeController extends BaseController{
 		return new ModelAndView("index");
 	}
 
-/*	@RequestMapping(value = { "/home" })
+	@RequestMapping(value = { "/home" })
 	public ModelAndView home2(Model model) {
 		return new ModelAndView("index");
-	}*/
+	}
 
 }
