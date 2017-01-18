@@ -1,5 +1,8 @@
 <h1>
   {{title}}
 </h1>
-<home-component></home-component>
-<dashboard-component></dashboard-component>
+<nav>
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+</nav>
+<router-outlet></router-outlet>
