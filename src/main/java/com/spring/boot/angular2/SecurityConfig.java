@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/dashboard/**").hasRole("ADMIN")
 			//.antMatchers("POST", "/add").hasRole("ADMIN")
 			.anyRequest().fullyAuthenticated()
+			//.anyRequest().permitAll()	//testing only
 			.and()
 		.formLogin()
 			.loginPage("/login")

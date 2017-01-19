@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 import { Authorization } from '../interface/authorization';
-
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
 
-    private autUrl: string = '/auth';
+    private authUrl: string = '/heroes/auth';
 
     constructor(private http: Http) { }
-
-    getAuthInfo(): Promise<Authorization> {
-        const url = `${this.autUrl}`;
-        return this.http.get(url)
+    getAuthDetails(): Promise<Authorization> {
+        console.log('Inside getAuthDetails ...');
+        return this.http.get(this.authUrl)
             .toPromise()
-            .then(response => response.json().data as Authorization)
+            .then(response => {
+                console.log('in auth service then: '+JSON.stringify(response.json(), null, 4));
+                return response.json() as Authorization})
             .catch(this.handleError);
     }
 

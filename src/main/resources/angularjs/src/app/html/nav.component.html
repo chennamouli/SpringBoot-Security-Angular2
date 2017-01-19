@@ -1,0 +1,5 @@
+<ul class="nav navbar-nav">
+    <li><a routerLink="/home" *ngIf="authorization.hasHomePage" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/heroes" *ngIf="authorization.hasHeroesPage" routerLinkActive="active">Heroes</a></li>
+    <li><a routerLink="/dashboard" *ngIf="authorization.hasDashboardPage" routerLinkActive="active">Dashboard</a></li>
+</ul>
