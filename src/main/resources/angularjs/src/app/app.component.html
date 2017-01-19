@@ -1,8 +1,41 @@
-<h1>
-  {{title}}
-</h1>
-<nav>
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+      <a class="navbar-brand" href="#">Heroes of the World</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+        <li><a routerLink="/heroes" routerLinkActive="active">Heroes</a></li>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
+        <!-- <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li> -->
+        <li class="logout">
+          <form th:action="@{/logout}" method="POST">
+            <input type="submit" value="Logout" class="btn-link" />
+          </form>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>
-<router-outlet></router-outlet>
+
+<div class="container-fluid mainContent">
+  <div class="row content">
+    <div class="column col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container-fluid">
+    <p class="text-muted">Place sticky footer content here.</p>
+  </div>
+</footer>

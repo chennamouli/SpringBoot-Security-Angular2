@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home.component';
 import { DashboardComponent } from './component/dashboard.component';
+import { NavComponent } from './component/nav.component';
+import {PageNotFoundComponent} from './component/page-not-found.component';
 
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, DashboardComponent
+    AppComponent, HomeComponent, DashboardComponent,NavComponent,PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
