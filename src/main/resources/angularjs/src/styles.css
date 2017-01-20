@@ -42,7 +42,6 @@ footer {
     color: #ccc;
 }
 li.logout{
-	padding: 15px;
 	text-decoration: none;
 }
 .logout .btn-link:hover {
