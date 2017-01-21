@@ -1,0 +1,13 @@
+<h2>Hero View</h2>
+<div *ngIf="hero">
+<div class="col-md-2" style="text-align: right">Hero Id:</div>
+<div class="col-md-3">{{hero.id}}</div>
+<br>
+<div class="col-md-2" style="text-align: right">Hero Name:</div>
+<div class="col-md-3">{{hero.name}}</div>
+</div>
+<div *ngIf="!hero">
+    Please select a hero
+</div>
+<br>
+<button class="btn btn-default" (click)="goBack()">Back to Heroes</button>

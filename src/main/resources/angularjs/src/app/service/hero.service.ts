@@ -31,13 +31,17 @@ export class HeroService {
             .catch(this.handleError);
     }
 
-    viewHero(id: number): Promise<{}> {
+    viewHero(id: number): Promise<Hero> {
         console.log('Inside viewHero: ' + id);
         return this.http.get(`${this.uri}/view/${id}`)
             .toPromise()
             .then(response => {
-                console.log('in viewHero then: ' + JSON.stringify(response.json(), null, 4));
-                return response.json()
+                if(response && response.json()){
+                    console.log('in viewHero then: ' + JSON.stringify(response.json(), null, 4));
+                    return response.json() as Hero
+                }else{
+                    return {};
+                }                
             })
             .catch(this.handleError);
     }
