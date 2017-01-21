@@ -11,7 +11,7 @@ export class HeroService {
     constructor(private http: Http) { }
     getHeroes(): Promise<Hero[]> {
         console.log('Inside getHeroes ...');
-        return this.http.get(`${this.uri}/list}`)
+        return this.http.get(`${this.uri}/list`)
             .toPromise()
             .then(response => {
                 console.log('in getHeroes then: ' + JSON.stringify(response.json(), null, 4));

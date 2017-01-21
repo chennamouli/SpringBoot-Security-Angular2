@@ -1,4 +1,4 @@
-<table class="table table-hover" **ngIf="heroes.size > 0">
+<table class="table table-hover" *ngIf="heroes && heroes.length > 0">
     <thead>
         <tr>
             <th>Id</th>
@@ -6,17 +6,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Doe</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Moe</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Dooley</td>
+        <tr *ngFor="let hero of heroes">
+            <td>{{hero.id}}</td>
+            <td>{{hero.name}}</td>
         </tr>
     </tbody>
 </table>

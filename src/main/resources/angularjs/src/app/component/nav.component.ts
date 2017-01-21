@@ -18,9 +18,9 @@ export class NavComponent implements OnInit {
         console.log('Inside NavComponent ngOnInit...');
         this.authService
             .getAuthDetails()
-            .then(auth => { 
-                 console.log('inside auth then...'+auth);
-                this.authorization = auth 
+            .then(auth => {
+                console.log('inside auth then...' + auth);
+                this.authorization = auth
             });
         console.log('Authorization: ' + this.authorization);
     }

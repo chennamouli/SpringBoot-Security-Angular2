@@ -2,5 +2,21 @@
   "/heroes/auth": {
     "target": "http://localhost:8080",
     "secure": false
+  },
+  "/heroes/list": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/heroes/add": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/heroes/view": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/heroes/delete": {
+    "target": "http://localhost:8080",
+    "secure": false
   }
 }

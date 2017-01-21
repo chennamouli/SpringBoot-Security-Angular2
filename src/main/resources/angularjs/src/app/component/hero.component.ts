@@ -13,11 +13,11 @@ export class HeroComponent implements OnInit {
 
     heroes: Hero[];
     ngOnInit(): void {
-        console.log('Inside NavComponent ngOnInit...');
+        console.log('Inside HeroComponent ngOnInit...');
         this.heroService
             .getHeroes()
             .then(heroes => {
-                console.log('inside HeroComponent...' + heroes);
+                console.log('inside HeroComponent then...' + heroes);
                 this.heroes = heroes
             });
         console.log('Heroes: ' + this.heroes);
