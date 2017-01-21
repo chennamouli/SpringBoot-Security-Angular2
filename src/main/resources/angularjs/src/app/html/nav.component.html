@@ -1,8 +1,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="myNavbar">
+            <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="myNavbar">
             <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">-->
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
@@ -10,12 +9,13 @@
 	      </button>
             <a class="navbar-brand" href="#">Heroes of the World</a>
         </div>
-         <div class="collapse navbar-collapse" id="myNavbar" [ngbCollapse]="isCollapsed">
-        <!--<div class="collapse navbar-collapse" id="myNavbar">-->
+        <div class="collapse navbar-collapse" id="myNavbar" [ngbCollapse]="isCollapsed">
+            <!--<div class="collapse navbar-collapse" id="myNavbar">-->
             <ul class="nav navbar-nav">
                 <li><a routerLink="/home" *ngIf="authorization.hasHomePage" routerLinkActive="active">Home</a></li>
                 <li><a routerLink="/heroes" *ngIf="authorization.hasHeroesPage" routerLinkActive="active">Heroes</a></li>
                 <li><a routerLink="/dashboard" *ngIf="authorization.hasDashboardPage" routerLinkActive="active">Dashboard</a></li>
+                <li><a routerLink="/add" *ngIf="authorization.hasHeroesPage" routerLinkActive="active">Add</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->

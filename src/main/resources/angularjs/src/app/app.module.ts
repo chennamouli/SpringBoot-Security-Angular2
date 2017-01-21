@@ -5,8 +5,9 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home.component';
-import { HeroComponent }      from './component/hero.component';
+import { HeroComponent } from './component/hero.component';
 import { DashboardComponent } from './component/dashboard.component';
+import { HeroAddComponent } from './component/hero-add.component';
 import { NavComponent } from './component/nav.component';
 import { PageNotFoundComponent } from './component/page-not-found.component';
 
@@ -15,7 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, HeroComponent, DashboardComponent, NavComponent, PageNotFoundComponent
+    AppComponent, HomeComponent, HeroComponent, DashboardComponent, HeroAddComponent, NavComponent, PageNotFoundComponent
   ],
   imports: [
     NgbModule.forRoot(),
