@@ -11,6 +11,7 @@ import { Subject } from 'rxjs/Subject';
     providers: [AuthService]
 })
 export class NavComponent implements OnInit {
+    public isCollapsed = false; //for sr-only menu
     authorization: Authorization = new Authorization();
     constructor(private authService: AuthService) { }
 
