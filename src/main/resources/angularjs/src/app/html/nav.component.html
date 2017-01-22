@@ -3,7 +3,7 @@
         type="button" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    <a class="navbar-brand" href="#">Heroes of the World</a>
+    <a class="navbar-brand" routerLink="/home">Heroes of the World</a>    
     <div class="collapse navbar-collapse" id="myNavbar" [ngbCollapse]="isCollapsed">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" routerLink="/home" *ngIf="authorization.hasHomePage" routerLinkActive="active">Home</a></li>
