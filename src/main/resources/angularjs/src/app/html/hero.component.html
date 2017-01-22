@@ -1,19 +1,31 @@
+<div class="page-header">
+    <h3>Heros</h3>
+    <hr>
+</div>
 <template ngbModalContainer></template>
 <template #content let-c="close" let-d="dismiss">
-  <div class="modal-header">
-    <h4 class="modal-title">Delete Hero</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <div class="modal-header">
+        <h4 class="modal-title">Delete Hero</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="modal-body">
-    <p>Are you sure want to delete?</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-  </div>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure want to delete the user "{{selectedHero.name}}"? </p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="c('Delete')">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+    </div>
 </template>
-
+<div class="form-group" *ngIf="messageType">
+    <ngb-alert [dismissible]="false" [type]='messageType'>
+        {{message}}
+    </ngb-alert>
+</div>
+<div *ngIf="heroes && heroes.length == 0">
+    No hero found!
+</div>
 <table class="table table-hover" *ngIf="heroes && heroes.length > 0">
     <thead>
         <tr>
@@ -30,7 +42,7 @@
                 <button class="btn btn-primary" (click)="viewHero(hero)">
                     View
                 </button>
-                <button class="btn btn-default" (click)="deleteHero(content, hero)">
+                <button class="btn btn-danger" (click)="deleteHero(content, hero)">
                     Delete
                 </button>
             </td>

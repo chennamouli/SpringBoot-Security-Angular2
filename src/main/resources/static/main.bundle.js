@@ -264,8 +264,11 @@ var HeroComponent = (function () {
         this.router = router;
     }
     HeroComponent.prototype.ngOnInit = function () {
-        var _this = this;
         console.log('Inside HeroComponent ngOnInit...');
+        this.getHeroes();
+    };
+    HeroComponent.prototype.getHeroes = function () {
+        var _this = this;
         this.heroService
             .getHeroes()
             .then(function (heroes) {
@@ -283,8 +286,25 @@ var HeroComponent = (function () {
         var _this = this;
         console.log('Deleting Hero: ' + hero.name);
         console.log('Deletign content: ' + content);
-        this.modalService.open(content).result.then(function (result) {
+        this.selectedHero = hero;
+        this.modalService.open(content, hero).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
+            if (result == 'Delete') {
+                _this.heroService
+                    .deleteHero(hero.id)
+                    .then(function (resp) {
+                    _this.message = resp['message'] + ' the user "' + hero.name + '"';
+                    if (resp['status'] == true) {
+                        _this.messageType = 'success';
+                        _this.getHeroes(); //if sucess then refresh the results.
+                    }
+                    else {
+                        _this.messageType = 'danger';
+                    }
+                    console.log('Is hero deleted: ' + JSON.stringify(resp));
+                    _this.closeResult = "Closed with: " + result;
+                });
+            }
         }, function (reason) {
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
         });
@@ -793,35 +813,35 @@ module.exports = "<nav-component></nav-component>\r\n<div class=\"container-flui
 /***/ 741:
 /***/ function(module, exports) {
 
-module.exports = "{{componentName}}"
+module.exports = "<div class=\"page-header\">\r\n    <h3>Dashboard</h3>\r\n    <hr>\r\n</div>\r\n{{componentName}}"
 
 /***/ },
 
 /***/ 742:
 /***/ function(module, exports) {
 
-module.exports = "<h2>Add Hero</h2>\r\n<form class=\"form-horizontal col-md-6\">\r\n  <div class=\"form-group\" *ngIf=\"messageType\">\r\n    <ngb-alert [dismissible]=\"false\" [type]='messageType'>\r\n      {{message}}\r\n    </ngb-alert>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label class=\"control-label col-sm-4\" for=\"heroName\">Hero name:</label>\r\n    <div class=\"col-sm-8\">\r\n      <input class=\"form-control\" id=\"heroName\" #heroName placeholder=\"Enter hero name\" maxlength=\"25\"/>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <div class=\"col-sm-offset-4 col-sm-8\">\r\n      <button class=\"btn btn-default\" (click)=\"add(heroName.value); heroName.value=''\">\r\n    Add\r\n  </button>\r\n    </div>\r\n  </div>\r\n</form>"
+module.exports = "<div class=\"page-header\">\r\n    <h3>Add Hero</h3>\r\n    <hr>\r\n</div>\r\n<form class=\"form-horizontal col-md-6\">\r\n  <div class=\"form-group\" *ngIf=\"messageType\">\r\n    <ngb-alert [dismissible]=\"false\" [type]='messageType'>\r\n      {{message}}\r\n    </ngb-alert>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label class=\"control-label col-sm-4\" for=\"heroName\">Hero name:</label>\r\n    <div class=\"col-sm-8\">\r\n      <input class=\"form-control\" id=\"heroName\" #heroName placeholder=\"Enter hero name\" maxlength=\"25\"/>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <div class=\"col-sm-offset-4 col-sm-8\">\r\n      <button class=\"btn btn-default\" (click)=\"add(heroName.value); heroName.value=''\">\r\n    Add\r\n  </button>\r\n    </div>\r\n  </div>\r\n</form>"
 
 /***/ },
 
 /***/ 743:
 /***/ function(module, exports) {
 
-module.exports = "<h2>Hero View</h2>\r\n<div *ngIf=\"hero\">\r\n<div class=\"col-md-2\" style=\"text-align: right\">Hero Id:</div>\r\n<div class=\"col-md-3\">{{hero.id}}</div>\r\n<br>\r\n<div class=\"col-md-2\" style=\"text-align: right\">Hero Name:</div>\r\n<div class=\"col-md-3\">{{hero.name}}</div>\r\n</div>\r\n<div *ngIf=\"!hero\">\r\n    Please select a hero\r\n</div>\r\n<br>\r\n<button class=\"btn btn-default\" (click)=\"goBack()\">Back to Heroes</button>"
+module.exports = "<div class=\"page-header\">\r\n    <h3>Hero View</h3>\r\n    <hr>\r\n</div>\r\n<div class=\"row\" *ngIf=\"hero\">\r\n    <div class=\"col-md-2\" style=\"text-align: right\">Hero Id:</div>\r\n<div class=\"col-md-2\">{{hero.id}}</div>\r\n</div>\r\n<div class=\"row\" *ngIf=\"hero\">\r\n    <div class=\"col-md-2\" style=\"text-align: right\">Hero Name:</div>\r\n<div class=\"col-md-2\">{{hero.name}}</div>\r\n</div>\r\n<div *ngIf=\"!hero\">\r\n    Please select a hero\r\n</div>\r\n<br>\r\n<button class=\"btn btn-default\" (click)=\"goBack()\">Back to Heroes</button>"
 
 /***/ },
 
 /***/ 744:
 /***/ function(module, exports) {
 
-module.exports = "<template ngbModalContainer></template>\r\n<template #content let-c=\"close\" let-d=\"dismiss\">\r\n  <div class=\"modal-header\">\r\n    <h4 class=\"modal-title\">Delete Hero</h4>\r\n    <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <p>Are you sure want to delete?</p>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-secondary\" (click)=\"c('Close click')\">Close</button>\r\n  </div>\r\n</template>\r\n\r\n<table class=\"table table-hover\" *ngIf=\"heroes && heroes.length > 0\">\r\n    <thead>\r\n        <tr>\r\n            <th>Id</th>\r\n            <th>Name</th>\r\n            <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let hero of heroes\">\r\n            <td>{{hero.id}}</td>\r\n            <td>{{hero.name}}</td>\r\n            <td>\r\n                <button class=\"btn btn-primary\" (click)=\"viewHero(hero)\">\r\n                    View\r\n                </button>\r\n                <button class=\"btn btn-default\" (click)=\"deleteHero(content, hero)\">\r\n                    Delete\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n"
+module.exports = "<div class=\"page-header\">\r\n    <h3>Heros</h3>\r\n    <hr>\r\n</div>\r\n<template ngbModalContainer></template>\r\n<template #content let-c=\"close\" let-d=\"dismiss\">\r\n    <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Delete Hero</h4>\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n    </div>\r\n    <div class=\"modal-body\">\r\n        <p>Are you sure want to delete the user \"{{selectedHero.name}}\"? </p>\r\n    </div>\r\n    <div class=\"modal-footer\">\r\n        <button type=\"button\" class=\"btn btn-danger\" (click)=\"c('Delete')\">Delete</button>\r\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"c('Close click')\">Close</button>\r\n    </div>\r\n</template>\r\n<div class=\"form-group\" *ngIf=\"messageType\">\r\n    <ngb-alert [dismissible]=\"false\" [type]='messageType'>\r\n        {{message}}\r\n    </ngb-alert>\r\n</div>\r\n<div *ngIf=\"heroes && heroes.length == 0\">\r\n    No hero found!\r\n</div>\r\n<table class=\"table table-hover\" *ngIf=\"heroes && heroes.length > 0\">\r\n    <thead>\r\n        <tr>\r\n            <th>Id</th>\r\n            <th>Name</th>\r\n            <th>Action</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr *ngFor=\"let hero of heroes\">\r\n            <td>{{hero.id}}</td>\r\n            <td>{{hero.name}}</td>\r\n            <td>\r\n                <button class=\"btn btn-primary\" (click)=\"viewHero(hero)\">\r\n                    View\r\n                </button>\r\n                <button class=\"btn btn-danger\" (click)=\"deleteHero(content, hero)\">\r\n                    Delete\r\n                </button>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>"
 
 /***/ },
 
 /***/ 745:
 /***/ function(module, exports) {
 
-module.exports = "<p>Hi, Welcome to 'Heroes of the World'</p>"
+module.exports = "<div class=\"page-header\">\r\n    <h3>Home</h3>\r\n    <hr>\r\n</div>\r\n<p>Hi, Welcome to 'Heroes of the World'</p>"
 
 /***/ },
 

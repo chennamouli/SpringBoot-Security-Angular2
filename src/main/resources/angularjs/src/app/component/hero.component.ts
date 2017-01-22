@@ -16,10 +16,16 @@ export class HeroComponent implements OnInit {
         private router: Router) { }
 
     closeResult: string;
+    message: string;
+    messageType: string;
     heroes: Hero[];
     selectedHero: Hero;
     ngOnInit(): void {
         console.log('Inside HeroComponent ngOnInit...');
+        this.getHeroes();
+    }
+
+    getHeroes(): void {
         this.heroService
             .getHeroes()
             .then(heroes => {
@@ -34,11 +40,28 @@ export class HeroComponent implements OnInit {
         this.selectedHero = hero;
         this.router.navigate(['/view/', hero.id]);
     }
+
     deleteHero(content: any, hero: Hero): void {
         console.log('Deleting Hero: ' + hero.name);
         console.log('Deletign content: ' + content);
-        this.modalService.open(content).result.then((result) => {
+        this.selectedHero = hero;
+        this.modalService.open(content, hero).result.then((result) => {
             this.closeResult = `Closed with: ${result}`;
+            if (result == 'Delete') {
+                this.heroService
+                    .deleteHero(hero.id)
+                    .then(resp => {
+                        this.message = resp['message'] + ' the user "' + hero.name + '"';
+                        if (resp['status'] == true) {
+                            this.messageType = 'success';
+                            this.getHeroes();//if sucess then refresh the results.
+                        } else {
+                            this.messageType = 'danger';
+                        }
+                        console.log('Is hero deleted: ' + JSON.stringify(resp));
+                        this.closeResult = `Closed with: ${result}`;
+                    });
+            }
         }, (reason) => {
             this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
