@@ -141,6 +141,9 @@ var EditorComponent = (function () {
     function EditorComponent() {
     }
     EditorComponent.prototype.ngOnInit = function () { };
+    EditorComponent.prototype.updateHTML = function (event) {
+        document.getElementById("preview").innerHTML = event.target.value;
+    };
     EditorComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'editor-component',
@@ -905,7 +908,7 @@ module.exports = "<div class=\"page-header\">\r\n    <h3>Dashboard</h3>\r\n    <
 /***/ 745:
 /***/ function(module, exports) {
 
-module.exports = "Editor"
+module.exports = "<form>\r\n    <div class=\"form-group\">\r\n        <label for=\"editor\">Enter HTML/Styles</label>\r\n        <textarea (keyup)=\"updateHTML($event)\" id=\"editor\" class=\"form-control\" rows=\"5\">\r\n<div></div>\r\n<style></style>\r\n        </textarea>\r\n    </div>\r\n</form>\r\n<p></p>\r\n<div id=\"preview\">\r\n</div>"
 
 /***/ },
 

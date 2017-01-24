@@ -10,4 +10,9 @@ export class EditorComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
+    editorTxt: string;
+
+    updateHTML(event: KeyboardEvent) {
+        document.getElementById("preview").innerHTML = (<HTMLInputElement>event.target).value;
+    }
 }

@@ -1,1 +1,12 @@
-Editor
+<form>
+    <div class="form-group">
+        <label for="editor">Enter HTML/Styles</label>
+        <textarea (keyup)="updateHTML($event)" id="editor" class="form-control" rows="5">
+<div></div>
+<style></style>
+        </textarea>
+    </div>
+</form>
+<p></p>
+<div id="preview">
+</div>
