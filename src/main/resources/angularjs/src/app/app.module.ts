@@ -10,6 +10,7 @@ import { DashboardComponent } from './component/dashboard.component';
 import { HeroAddComponent } from './component/hero-add.component';
 import { HeroViewComponent } from './component/hero-view.component';
 import { HelpComponent } from './component/help.component';
+import { EditorComponent } from './component/editor.component';
 
 import { NavComponent } from './component/nav.component';
 import { PageNotFoundComponent } from './component/page-not-found.component';
@@ -19,9 +20,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
-    AppComponent, HomeComponent, HeroComponent, 
+    AppComponent, HomeComponent, HeroComponent,
     DashboardComponent, HeroAddComponent, HeroViewComponent,
-    HelpComponent,
+    HelpComponent, EditorComponent,
     NavComponent, PageNotFoundComponent
   ],
   imports: [
