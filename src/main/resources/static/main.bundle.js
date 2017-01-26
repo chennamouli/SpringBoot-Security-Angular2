@@ -140,9 +140,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var EditorComponent = (function () {
     function EditorComponent() {
     }
-    EditorComponent.prototype.ngOnInit = function () { };
+    EditorComponent.prototype.ngOnInit = function () {
+        if (sessionStorage) {
+            var editorTxt = sessionStorage.getItem("editorTxt");
+            document.getElementById("editor").innerHTML = editorTxt;
+            document.getElementById("preview").innerHTML = editorTxt;
+        }
+    };
     EditorComponent.prototype.updateHTML = function (event) {
-        document.getElementById("preview").innerHTML = event.target.value;
+        var editorTxt = event.target.value;
+        document.getElementById("preview").innerHTML = editorTxt;
+        if (sessionStorage) {
+            sessionStorage.setItem("editorTxt", editorTxt);
+        }
     };
     EditorComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({

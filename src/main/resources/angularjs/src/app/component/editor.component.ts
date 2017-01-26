@@ -9,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class EditorComponent implements OnInit {
     constructor() { }
 
-    ngOnInit() { }
-    editorTxt: string;
+    ngOnInit() {
+        if (sessionStorage) {
+            let editorTxt = sessionStorage.getItem("editorTxt");
+            document.getElementById("editor").innerHTML = editorTxt;
+            document.getElementById("preview").innerHTML = editorTxt;
+        }
+    }
 
     updateHTML(event: KeyboardEvent) {
-        document.getElementById("preview").innerHTML = (<HTMLInputElement>event.target).value;
+        let editorTxt = (<HTMLInputElement>event.target).value;
+        document.getElementById("preview").innerHTML = editorTxt;
+        if (sessionStorage) {
+            sessionStorage.setItem("editorTxt", editorTxt);
+        }
     }
 }
