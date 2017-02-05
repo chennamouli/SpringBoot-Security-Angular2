@@ -26,6 +26,11 @@ public class HomeController extends BaseController {
 	public ModelAndView home2(Model model) {
 		return new ModelAndView("index");
 	}
+	
+	@RequestMapping(value = { "/popup" })
+	public ModelAndView popup(Model model) {
+		return new ModelAndView("popup");
+	}
 
 	/*
 	 * http://websystique.com/spring-security/spring-security-4-logout-example/
